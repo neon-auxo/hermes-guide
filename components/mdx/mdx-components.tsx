@@ -55,12 +55,20 @@ export const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  code: (props) => (
-    <code
-      className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-primary"
-      {...props}
-    />
-  ),
+  code: ({ children, ...props }) => {
+    // rehype-pretty-code sets data-language on block code — skip styling those
+    if ("data-language" in props) {
+      return <code {...props}>{children}</code>;
+    }
+    return (
+      <code
+        className="rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-primary"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
   Callout,
   TerminalBlock,
   WindowsNote,
