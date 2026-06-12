@@ -1,7 +1,8 @@
 // components/home/hero-section.tsx
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function HeroSection() {
   return (
@@ -14,14 +15,12 @@ export function HeroSection() {
         코딩 몰라도 OK. AI 에이전트 <strong className="text-primary">Hermes</strong>를 처음부터 차근차근 설치하고 Slack에 연결해봅니다.
       </p>
       <div className="mt-8 flex flex-wrap gap-3 justify-center">
-        <Button asChild size="lg" className="gap-2">
-          <Link href="/guide/what-is-hermes">
-            시작하기 <ArrowRight className="size-4" />
-          </Link>
-        </Button>
-        <Button asChild variant="outline" size="lg">
-          <Link href="/guide/prerequisites/slack-setup">사전 준비 확인</Link>
-        </Button>
+        <Link href="/guide/what-is-hermes" className={cn(buttonVariants({ size: "lg" }), "gap-2")}>
+          시작하기 <ArrowRight className="size-4" />
+        </Link>
+        <Link href="/guide/prerequisites/slack-setup" className={buttonVariants({ variant: "outline", size: "lg" })}>
+          사전 준비 확인
+        </Link>
       </div>
     </section>
   );
