@@ -32,7 +32,7 @@ export default async function GuidePage({ params }: Props) {
   try {
     page = await getGuidePage(slug);
   } catch {
-    notFound();
+    return notFound();
   }
 
   const groups = await buildNavigation();
