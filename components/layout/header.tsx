@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Moon, Sun, Monitor, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,9 @@ const THEMES = [
 export function Header() {
   const { theme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const cycleTheme = () => {
     const idx = THEMES.findIndex((t) => t.value === theme);
@@ -24,8 +27,10 @@ export function Header() {
     setTheme(next.value);
   };
 
-  const CurrentIcon =
-    THEMES.find((t) => t.value === theme)?.icon ?? Monitor;
+  // 마운트 전에는 Monitor(시스템) 아이콘으로 고정해 SSR과 일치시킴
+  const CurrentIcon = mounted
+    ? (THEMES.find((t) => t.value === theme)?.icon ?? Monitor)
+    : Monitor;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -41,7 +46,7 @@ export function Header() {
             size="icon"
             className="size-8"
             onClick={cycleTheme}
-            title={THEMES.find((t) => t.value === theme)?.label}
+            title={mounted ? THEMES.find((t) => t.value === theme)?.label : "시스템 설정"}
           >
             <CurrentIcon className="size-4" />
             <span className="sr-only">테마 전환</span>
