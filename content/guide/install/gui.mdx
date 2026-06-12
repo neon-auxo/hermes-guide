@@ -1,0 +1,82 @@
+---
+title: "GUI 설치"
+description: "헤르메스 웹 인터페이스(GUI) 설치 및 브라우저 접속 방법"
+order: 10
+group: "설치하기"
+---
+
+# GUI 설치
+
+CLI(터미널)만으로도 헤르메스를 사용할 수 있지만, 브라우저 기반 **GUI(웹 인터페이스)**를 사용하면 훨씬 편리합니다.
+
+## GUI란?
+
+헤르메스 GUI는 로컬 서버에서 실행되는 웹 앱입니다. 브라우저에서 `http://localhost:3000` 같은 주소로 접속해 사용합니다.
+
+- 대화 기록 시각적으로 확인
+- 설정 화면에서 클릭으로 모델·도구 변경
+- 여러 에이전트 동시 관리
+
+## GUI 설치
+
+<TerminalBlock title="GUI 설치">
+```bash
+hermes install-gui
+```
+</TerminalBlock>
+
+설치 중 진행 상황이 표시됩니다:
+
+```
+Downloading hermes-gui...
+Installing dependencies...
+✓ GUI installed successfully
+```
+
+## GUI 실행
+
+<TerminalBlock title="GUI 실행">
+```bash
+hermes gui
+```
+</TerminalBlock>
+
+아래 메시지가 나오면 브라우저에서 접속할 수 있습니다:
+
+```
+✓ Hermes GUI running at http://localhost:3000
+```
+
+브라우저를 열고 **http://localhost:3000** 에 접속하세요.
+
+<Callout type="tip">
+GUI를 항상 백그라운드에서 실행하고 싶다면:
+
+```bash
+hermes gui --background
+```
+</Callout>
+
+## GUI 중지
+
+<TerminalBlock title="GUI 중지">
+```bash
+hermes gui --stop
+```
+</TerminalBlock>
+
+<WindowsNote>
+Windows에서 GUI 실행 후 브라우저가 자동으로 열리지 않으면 직접 `http://localhost:3000` 을 주소창에 입력하세요.
+방화벽 경고가 뜨면 "액세스 허용"을 클릭하세요.
+</WindowsNote>
+
+## 여기까지 완료했다면 🎉
+
+축하합니다! 헤르메스 설치와 기본 설정이 모두 끝났습니다.
+
+- ✅ CLI 설치
+- ✅ Slack 연결
+- ✅ 모델 설정  
+- ✅ GUI 설치
+
+이제 Slack에서 `@Hermes`를 멘션해 다양한 작업을 시켜보세요!
