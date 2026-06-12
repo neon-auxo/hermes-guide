@@ -1,4 +1,5 @@
 // lib/navigation.ts
+import { cache } from "react";
 import { getAllGuidePages } from "./content";
 
 export interface NavItem {
@@ -12,13 +13,17 @@ export interface NavGroup {
   items: NavItem[];
 }
 
-export async function buildNavigation(): Promise<NavGroup[]> {
+export const buildNavigation = cache(async (): Promise<NavGroup[]> => {
   const pages = await getAllGuidePages();
   const groups: Record<string, NavItem[]> = {};
+  const groupOrder: Record<string, number> = {};
 
   for (const { frontmatter, slug } of pages) {
     const g = frontmatter.group;
-    if (!groups[g]) groups[g] = [];
+    if (!groups[g]) {
+      groups[g] = [];
+      groupOrder[g] = frontmatter.order;
+    }
     groups[g].push({
       title: frontmatter.title,
       slug,
@@ -26,6 +31,7 @@ export async function buildNavigation(): Promise<NavGroup[]> {
     });
   }
 
-  // group 내 첫 번째 항목의 order 순으로 그룹 정렬
-  return Object.entries(groups).map(([group, items]) => ({ group, items }));
-}
+  return Object.entries(groups)
+    .sort(([a], [b]) => (groupOrder[a] ?? 0) - (groupOrder[b] ?? 0))
+    .map(([group, items]) => ({ group, items }));
+});
