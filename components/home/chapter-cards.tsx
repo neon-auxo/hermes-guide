@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 const CHAPTERS = [
   {
     emoji: "🤔",
-    title: "헤르메스란?",
-    desc: "Nous Research의 AI 에이전트 프레임워크. 무엇이고 왜 쓰는지 알아봅니다.",
+    title: "Hermes란?",
+    desc: "Nous Research가 설계한 에이전트의 구조 — memory·skill·tool이 어떻게 맞물리는지, 왜 이런 방식으로 만들어졌는지 살펴봅니다.",
     href: "/guide/what-is-hermes",
   },
   {
@@ -18,19 +18,19 @@ const CHAPTERS = [
   {
     emoji: "🛠️",
     title: "사전 준비",
-    desc: "Slack 설정, API 키 발급, 설치 전 꼭 확인해야 할 것들을 정리했습니다.",
+    desc: "Slack 워크스페이스, LLM 키 또는 Portal 계정, 그리고 키를 안전하게 보관할 규칙부터 정리합니다.",
     href: "/guide/prerequisites/slack-setup",
   },
   {
     emoji: "⚡",
     title: "설치하기",
-    desc: "curl 한 줄로 CLI 설치, 온보딩, Slack 연결, 모델 설정까지 단계별 진행.",
+    desc: "curl 한 줄로 CLI를 설치하고, 온보딩을 거쳐 Slack을 연결하고, 사용할 model을 설정하는 과정을 순서대로 안내합니다.",
     href: "/guide/install/curl",
   },
   {
     emoji: "🖥️",
     title: "GUI 설치",
-    desc: "브라우저에서 쓸 수 있는 헤르메스 웹 인터페이스 설치 방법.",
+    desc: "터미널 없이 쓸 수 있는 Hermes Desktop 앱을 설치하는 방법을 안내합니다. macOS/Windows 인스톨러 또는 CLI에서 실행하는 두 가지 경로를 소개합니다.",
     href: "/guide/install/gui",
   },
 ] as const;

@@ -2,6 +2,8 @@ import type { MDXComponents } from "mdx/types";
 import { Callout } from "./callout";
 import { TerminalBlock } from "./terminal-block";
 import { WindowsNote } from "./windows-note";
+import { Term } from "./term";
+import { HermesFlow } from "./hermes-flow";
 
 export const mdxComponents: MDXComponents = {
   h1: (props) => (
@@ -72,4 +74,6 @@ export const mdxComponents: MDXComponents = {
   Callout,
   TerminalBlock,
   WindowsNote,
+  Term,
+  HermesFlow,
 };

@@ -1,82 +1,52 @@
 ---
-title: "GUI 설치"
-description: "헤르메스 웹 인터페이스(GUI) 설치 및 브라우저 접속 방법"
+title: "GUI 설치 (Hermes Desktop)"
+description: "Hermes Desktop 앱 설치 방법 — macOS/Windows 인스톨러 또는 CLI에서 실행"
 order: 10
 group: "설치하기"
 ---
 
-# GUI 설치
+# GUI 설치 (Hermes Desktop)
 
-CLI(터미널)만으로도 헤르메스를 사용할 수 있지만, 브라우저 기반 **GUI(웹 인터페이스)**를 사용하면 훨씬 편리합니다.
+CLI(터미널)만으로도 Hermes를 사용할 수 있지만, **Hermes Desktop** 앱을 사용하면 GUI 환경에서 더 편리하게 쓸 수 있습니다.
 
-## GUI란?
+Hermes Desktop은 브라우저 웹앱이 아니라 **macOS/Windows용 네이티브 데스크탑 앱**입니다.
 
-헤르메스 GUI는 로컬 서버에서 실행되는 웹 앱입니다. 브라우저에서 `http://localhost:3000` 같은 주소로 접속해 사용합니다.
+## 방법 1 — 인스톨러로 설치 (권장)
 
-- 대화 기록 시각적으로 확인
-- 설정 화면에서 클릭으로 모델·도구 변경
-- 여러 에이전트 동시 관리
+공식 사이트에서 인스톨러를 다운로드해 실행하면 CLI와 Desktop 앱이 함께 설치됩니다.
 
-## GUI 설치
+1. [hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/) 에서 **Download** 클릭
+2. macOS 또는 Windows용 인스톨러 다운로드
+3. 인스톨러 실행 — Python, Node.js 등 필요한 의존성 자동 설치
 
-<TerminalBlock title="GUI 설치">
-```bash
-hermes install-gui
-```
-</TerminalBlock>
-
-설치 중 진행 상황이 표시됩니다:
-
-```
-Downloading hermes-gui...
-Installing dependencies...
-✓ GUI installed successfully
-```
-
-## GUI 실행
-
-<TerminalBlock title="GUI 실행">
-```bash
-hermes gui
-```
-</TerminalBlock>
-
-아래 메시지가 나오면 브라우저에서 접속할 수 있습니다:
-
-```
-✓ Hermes GUI running at http://localhost:3000
-```
-
-브라우저를 열고 **http://localhost:3000** 에 접속하세요.
-
-<Callout type="tip">
-GUI를 항상 백그라운드에서 실행하고 싶다면:
-
-```bash
-hermes gui --background
-```
+<Callout type="tip" title="이미 curl로 CLI를 설치했다면">
+인스톨러를 다시 설치할 필요 없이 방법 2로 Desktop 앱만 실행할 수 있습니다.
 </Callout>
 
-## GUI 중지
+## 방법 2 — CLI에서 Desktop 앱 실행
 
-<TerminalBlock title="GUI 중지">
+curl로 CLI를 이미 설치한 경우, 아래 명령으로 Desktop 앱을 실행합니다.
+
+<TerminalBlock title="Desktop 앱 실행">
 ```bash
-hermes gui --stop
+hermes desktop
 ```
 </TerminalBlock>
 
+처음 실행 시 Desktop 앱 구성 요소를 자동으로 설치합니다.
+
 <WindowsNote>
-Windows에서 GUI 실행 후 브라우저가 자동으로 열리지 않으면 직접 `http://localhost:3000` 을 주소창에 입력하세요.
-방화벽 경고가 뜨면 "액세스 허용"을 클릭하세요.
+Windows에서 인스톨러 실행 시 보안 경고가 뜨면 "추가 정보 → 실행" 을 클릭하세요.
+방화벽 허용 여부를 묻는 경우 "액세스 허용"을 선택하세요.
 </WindowsNote>
 
 ## 여기까지 완료했다면 🎉
 
-축하합니다! 헤르메스 설치와 기본 설정이 모두 끝났습니다.
+축하합니다! Hermes 설치와 기본 설정이 모두 끝났습니다.
 
 - ✅ CLI 설치
 - ✅ Slack 연결
-- ✅ 모델 설정  
-- ✅ GUI 설치
+- ✅ model 설정
+- ✅ Desktop 앱 설치
 
 이제 Slack에서 `@Hermes`를 멘션해 다양한 작업을 시켜보세요!

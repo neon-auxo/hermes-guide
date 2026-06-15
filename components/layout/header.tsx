@@ -37,7 +37,7 @@ export function Header() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-primary">
           <span>🪬</span>
-          <span>헤르메스 가이드</span>
+          <span>Hermes 가이드</span>
         </Link>
 
         <div className="flex items-center gap-2">
