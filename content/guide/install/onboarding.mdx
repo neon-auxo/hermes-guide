@@ -21,15 +21,7 @@ hermes
 ```
 </TerminalBlock>
 
-AI 제공자가 아직 설정되지 않은 상태이면 Hermes가 자동으로 **Nous Portal 가입/로그인 화면**을 엽니다. 별도 명령 없이 바로 브라우저 창이 뜹니다.
-
-<Callout type="info" title="화면이 안 뜨나요?">
-브라우저 팝업이 차단됐거나 이미 다른 제공자가 설정된 경우입니다. 아래 명령으로 직접 Nous Portal 설정을 시작하세요:
-
-```bash
-hermes setup --portal
-```
-</Callout>
+AI 제공자가 아직 설정되지 않은 상태이면 Hermes가 자동으로 **브라우저에 Nous Portal 가입/로그인 화면**을 엽니다.
 
 ---
 
@@ -48,44 +40,36 @@ hermes setup --portal
 Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다. 별도 비밀번호 없이 기존 계정으로 바로 가입됩니다.
 </Callout>
 
-로그인이 완료되면 브라우저 창이 닫히고 터미널로 돌아옵니다. Hermes가 자동으로 Nous Portal을 AI 제공자로 설정합니다.
+로그인이 완료되면 브라우저 창이 닫히고 **터미널의 hermes 세션으로 자동 복귀**됩니다. Hermes가 Nous Portal을 AI 제공자로 설정하고, 모델·도구 목록이 포함된 시작 배너가 표시됩니다.
 
 ---
 
-## 3단계: 무료 모델 확인
+## 3단계: 무료 모델 확인 / 변경
 
-Nous Portal **Free 플랜**은 무료로 사용할 수 있는 모델을 제공합니다.
+로그인 후 hermes 세션 안에 있는 상태에서, 슬래시 명령어로 모델을 확인하거나 바꿀 수 있습니다.
+
+```
+/model
+```
+
+대화형 메뉴에서 모델 목록이 표시됩니다. Nous Portal Free 플랜에서 무료로 사용할 수 있는 모델은 아래와 같습니다.
 
 | 모델 | 특징 |
 |------|------|
 | `stepfun/step-3.7-flash:free` | 빠른 응답, 일반 대화·코딩에 적합 |
 | `nvidia/nemotron-3-ultra:free` | 고품질 추론, 복잡한 작업에 적합 |
 
-현재 설정된 모델을 바꾸고 싶다면:
-
-<TerminalBlock title="모델 변경">
-```bash
-hermes model
-```
-</TerminalBlock>
-
-대화형 메뉴에서 모델 목록이 표시됩니다. `:free`가 붙은 모델을 선택하면 무료로 사용할 수 있습니다.
+`:free`가 붙은 모델이 무료 모델입니다.
 
 <Callout type="info">
-설정값은 `~/.hermes/.env`(시크릿)와 `~/.hermes/config.yaml`(일반 설정)에 자동 저장됩니다.
+`/`를 입력하면 사용 가능한 모든 슬래시 명령어 목록이 자동완성으로 표시됩니다.
 </Callout>
 
 ---
 
 ## 4단계: 첫 대화
 
-<TerminalBlock title="Hermes 실행">
-```bash
-hermes
-```
-</TerminalBlock>
-
-실행하면 현재 모델과 사용 가능한 도구 목록이 표시됩니다. 아래처럼 간단한 메시지를 입력해 보세요.
+모델이 설정됐으면 hermes 세션에 바로 입력하세요.
 
 ```
 현재 디렉토리에 어떤 파일이 있는지 알려줘
@@ -94,7 +78,7 @@ hermes
 Hermes가 답변하면 설정 완료입니다.
 
 <Callout type="tip">
-`hermes --tui`를 쓰면 마우스 선택과 모달 오버레이를 지원하는 더 나은 UI로 실행됩니다.
+`hermes --tui`로 실행하면 마우스 선택과 모달 오버레이를 지원하는 더 나은 UI로 시작할 수 있습니다. `/`를 입력하면 슬래시 명령어 자동완성이 뜹니다.
 </Callout>
 
 <Callout type="warning" title="대화가 안 된다면">
