@@ -7,35 +7,30 @@ group: "설치하기"
 
 # curl로 설치하기
 
-Hermes CLI 설치는 터미널 명령어 한 줄이면 됩니다.
+Hermes CLI 설치는 터미널 명령어 한 줄이면 됩니다. 사용하는 운영체제를 선택하세요:
 
-<Callout type="info" title="macOS / Linux 사전 확인">
-Git이 필요합니다. 아래 명령으로 확인하세요:
+<Tabs>
 
+<Tab label="macOS / Linux">
+
+## 사전 확인
+
+Git이 필요합니다. 터미널에서 확인하세요:
+
+<TerminalBlock title="Git 확인">
 ```bash
 git --version
 ```
+</TerminalBlock>
 
 `git version 2.x.x`가 나오면 됩니다. 없다면 [git-scm.com](https://git-scm.com)에서 설치하세요.
-</Callout>
-
-<WindowsNote>
-Windows는 Git이 필요 없습니다. PowerShell 전용 설치 명령을 사용하세요 — 아래 **Windows 설치** 섹션을 참고하세요.
-</WindowsNote>
 
 ## 터미널 열기
 
-**macOS**에서 터미널을 여는 방법:
 - `Cmd + Space` → "터미널" 검색 → 엔터
-- Finder → 응용 프로그램 → 유틸리티 → Terminal.app
-
-<WindowsNote>
-Windows에서는 **PowerShell**을 관리자 권한으로 열어주세요. 시작 버튼 → PowerShell 검색 → 우클릭 → "관리자 권한으로 실행"
-</WindowsNote>
+- 또는 Finder → 응용 프로그램 → 유틸리티 → Terminal.app
 
 ## 설치 명령어 실행
-
-### macOS / Linux
 
 <TerminalBlock title="Hermes CLI 설치">
 ```bash
@@ -43,18 +38,9 @@ curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 ```
 </TerminalBlock>
 
-### Windows (PowerShell)
-
-<TerminalBlock title="Hermes CLI 설치 (PowerShell)">
-```powershell
-iex (irm https://hermes-agent.nousresearch.com/install.ps1)
-```
-</TerminalBlock>
-
 이 명령이 자동으로 처리하는 것:
-1. OS 감지
-2. Python, Node.js v22, ripgrep, ffmpeg 등 필요한 도구 자동 설치
-3. Hermes CLI 최신 버전 다운로드 및 설치 (`~/.local/bin/hermes`)
+1. Python, Node.js v22, ripgrep, ffmpeg 등 필요한 도구 자동 설치
+2. Hermes CLI 최신 버전 다운로드 및 설치 (`~/.local/bin/hermes`)
 
 <Callout type="info" title="설치 시간">
 인터넷 속도에 따라 1~3분 정도 소요됩니다.
@@ -62,7 +48,7 @@ iex (irm https://hermes-agent.nousresearch.com/install.ps1)
 
 ## 설치 확인
 
-설치가 완료되면 셸을 새로 고친 후 실행하세요:
+설치 완료 후 셸을 새로 고침하고 실행하세요:
 
 <TerminalBlock title="셸 새로 고침 및 실행">
 ```bash
@@ -71,11 +57,11 @@ hermes
 ```
 </TerminalBlock>
 
-Hermes가 실행되면 성공입니다. 버전만 확인하고 싶다면 `hermes --version`을 입력하세요.
+Hermes가 실행되면 성공입니다.
 
 ## 문제 해결
 
-무슨 문제인지 모르겠다면 먼저 아래 명령을 실행하세요. 문제를 진단하고 해결 방법을 알려줍니다:
+무슨 문제인지 모르겠다면 먼저 실행하세요:
 
 <TerminalBlock title="자가 진단">
 ```bash
@@ -83,9 +69,9 @@ hermes doctor
 ```
 </TerminalBlock>
 
-### `command not found: hermes` 오류
+### `command not found: hermes`
 
-셸을 새로 고침하면 해결됩니다:
+셸 새로 고침으로 해결됩니다:
 
 <TerminalBlock title="셸 새로 고침">
 ```bash
@@ -95,7 +81,7 @@ source ~/.zshrc   # bash 사용자라면: source ~/.bashrc
 
 그래도 안 된다면 PATH를 직접 추가하세요:
 
-<TerminalBlock title="PATH 추가 (zsh)">
+<TerminalBlock title="PATH 추가">
 ```bash
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
@@ -103,13 +89,9 @@ hermes --version
 ```
 </TerminalBlock>
 
-<WindowsNote>
-Windows에서 `hermes` 명령이 인식되지 않으면 PowerShell을 재시작한 후 다시 시도해보세요. 그래도 안 된다면 환경 변수 PATH에 설치 경로를 추가해야 합니다.
-</WindowsNote>
+### "확인되지 않은 개발자" 보안 경고
 
-### macOS — "확인되지 않은 개발자" 보안 경고
-
-처음 실행 시 Gatekeeper 경고가 뜨면 아래 명령을 실행하세요:
+처음 실행 시 Gatekeeper 경고가 뜨면:
 
 <TerminalBlock title="보안 경고 해제">
 ```bash
@@ -121,7 +103,7 @@ xattr -dr com.apple.quarantine ~/.local/bin/hermes
 
 ### 설치 명령이 실패하는 경우 (네트워크 오류)
 
-회사 네트워크나 VPN 환경에서 설치 서버에 접근이 차단될 수 있습니다. 아래 명령으로 연결을 확인하세요:
+회사 네트워크나 VPN이라면 아래로 연결을 확인하세요:
 
 <TerminalBlock title="연결 확인">
 ```bash
@@ -129,7 +111,7 @@ curl -I https://hermes-agent.nousresearch.com
 ```
 </TerminalBlock>
 
-`HTTP/2 200` 또는 `HTTP/2 301`이 나오면 정상입니다. `Could not resolve host` 오류가 나오면 VPN을 끄거나 네트워크 관리자에게 문의하세요.
+`HTTP/2 200` 또는 `HTTP/2 301`이 나오면 정상입니다. `Could not resolve host`라면 VPN을 끄거나 네트워크 관리자에게 문의하세요.
 
 ### 권한 오류 (Permission denied)
 
@@ -138,3 +120,63 @@ curl -I https://hermes-agent.nousresearch.com
 sudo chmod +x ~/.local/bin/hermes
 ```
 </TerminalBlock>
+
+</Tab>
+
+<Tab label="Windows">
+
+## 터미널 열기
+
+**PowerShell**을 관리자 권한으로 열어주세요:
+
+시작 버튼 → `PowerShell` 검색 → 우클릭 → **관리자 권한으로 실행**
+
+## 설치 명령어 실행
+
+<TerminalBlock title="Hermes CLI 설치 (PowerShell)">
+```powershell
+iex (irm https://hermes-agent.nousresearch.com/install.ps1)
+```
+</TerminalBlock>
+
+이 명령이 자동으로 처리하는 것:
+1. Python, Node.js v22, ripgrep, ffmpeg 등 필요한 도구 자동 설치
+2. Hermes CLI 최신 버전 다운로드 및 설치
+
+<Callout type="info" title="설치 시간">
+인터넷 속도에 따라 1~3분 정도 소요됩니다.
+</Callout>
+
+## 설치 확인
+
+설치 완료 후 PowerShell을 새로 열고 실행하세요:
+
+<TerminalBlock title="실행">
+```powershell
+hermes
+```
+</TerminalBlock>
+
+Hermes가 실행되면 성공입니다.
+
+## 문제 해결
+
+무슨 문제인지 모르겠다면 먼저 실행하세요:
+
+<TerminalBlock title="자가 진단">
+```powershell
+hermes doctor
+```
+</TerminalBlock>
+
+### `hermes` 명령을 찾을 수 없음
+
+PowerShell을 완전히 닫고 다시 열어서 실행해보세요. 그래도 안 된다면 환경 변수 PATH에 설치 경로가 추가됐는지 확인하세요.
+
+### 설치 명령이 실패하는 경우 (네트워크 오류)
+
+회사 네트워크나 VPN이라면 설치 서버 접근이 차단됐을 수 있습니다. VPN을 끄거나 네트워크 관리자에게 문의하세요.
+
+</Tab>
+
+</Tabs>

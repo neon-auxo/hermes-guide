@@ -4,6 +4,7 @@ import { TerminalBlock } from "./terminal-block";
 import { WindowsNote } from "./windows-note";
 import { Term } from "./term";
 import { HermesFlow } from "./hermes-flow";
+import { Tabs, Tab } from "./tabs";
 
 export const mdxComponents: MDXComponents = {
   h1: (props) => (
@@ -76,4 +77,6 @@ export const mdxComponents: MDXComponents = {
   WindowsNote,
   Term,
   HermesFlow,
+  Tabs,
+  Tab,
 };
