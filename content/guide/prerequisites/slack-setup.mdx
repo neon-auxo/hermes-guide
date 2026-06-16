@@ -95,7 +95,7 @@ App-Level Token은 **Settings → Basic Information → App-Level Tokens**에서
 1. 왼쪽 메뉴 **Settings → Install App** 클릭
 2. **Install to Workspace** 클릭
 3. 권한 요청 화면에서 **허용** 클릭
-4. **Bot User OAuth Token** 복사 (`xoxb-`로 시작) → 안전하게 보관
+4. **Bot User OAuth Token** 복사 (`xoxb-`로 시작) → 안전하게 보관 (이것이 `SLACK_BOT_TOKEN`)
 
 <Callout type="warning" title="스코프나 이벤트를 변경했다면 반드시 Reinstall">
 권한(scope)이나 이벤트를 추가한 뒤에는 **Reinstall to Agents**를 다시 눌러야 적용됩니다.
@@ -110,7 +110,7 @@ Hermes는 허용된 사용자 목록(Member ID)으로 보안을 관리합니다.
 3. `⋮` (더보기) 버튼 클릭
 4. **멤버 ID 복사(Copy member ID)** 선택
 
-Member ID는 `U01ABC2DEF3` 형태입니다.
+Member ID는 `U01ABC2DEF3` 형태입니다. 이것이 `SLACK_ALLOWED_USERS`에 입력할 값입니다.
 
 ## 8단계: 봇을 채널에 초대
 
