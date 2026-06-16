@@ -43,7 +43,7 @@ curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 2. Hermes CLI 최신 버전 다운로드 및 설치 (`~/.local/bin/hermes`)
 
 <Callout type="info" title="설치 시간">
-인터넷 속도에 따라 1~3분 정도 소요됩니다.
+인터넷 속도에 따라 2분 이내로 소요됩니다.
 </Callout>
 
 ## 설치 확인
@@ -113,13 +113,6 @@ curl -I https://hermes-agent.nousresearch.com
 
 `HTTP/2 200` 또는 `HTTP/2 301`이 나오면 정상입니다. `Could not resolve host`라면 VPN을 끄거나 네트워크 관리자에게 문의하세요.
 
-### 권한 오류 (Permission denied)
-
-<TerminalBlock title="권한 부여">
-```bash
-sudo chmod +x ~/.local/bin/hermes
-```
-</TerminalBlock>
 
 </Tab>
 
