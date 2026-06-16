@@ -60,3 +60,43 @@ Hermes가 응답하면 연결 성공입니다! 🎉
 <WindowsNote>
 Windows에서도 `hermes onboarding` 명령은 동일합니다. PowerShell에서 실행하세요. 토큰 붙여넣기는 `Ctrl+V` 또는 오른쪽 클릭 → 붙여넣기.
 </WindowsNote>
+
+## Hermes에 Slack 설정하기
+
+온보딩 대신 직접 설정 파일에 추가할 수도 있습니다. `~/.hermes/.env` 파일에 아래 내용을 입력하세요:
+
+<TerminalBlock title="~/.hermes/.env">
+```bash
+SLACK_BOT_TOKEN=xoxb-여기에붙여넣기
+SLACK_APP_TOKEN=xapp-여기에붙여넣기
+SLACK_ALLOWED_USERS=U01ABC2DEF3
+```
+</TerminalBlock>
+
+또는 아래 명령으로 대화형으로 설정할 수 있습니다:
+
+<TerminalBlock title="대화형 설정">
+```bash
+hermes gateway setup
+```
+</TerminalBlock>
+
+설정 후 Gateway를 시작합니다:
+
+<TerminalBlock title="Gateway 시작">
+```bash
+hermes gateway
+```
+</TerminalBlock>
+
+## 응답이 없을 때 점검 순서
+
+`@hermes 이름이 뭐야?` 처럼 멘션을 보냈는데 반응이 없다면:
+
+1. Socket Mode가 ON인지 확인
+2. `message.channels` / `message.groups` / `message.im` / `app_mention` 이벤트가 모두 추가됐는지 확인
+3. `channels:history` / `groups:history` scope가 추가됐는지 확인
+4. **Reinstall to Agents**를 실행했는지 확인 (scope·이벤트 변경 후 필수)
+5. `/invite @Hermes`로 봇을 채널에 초대했는지 확인
+6. DM에서 응답이 없다면 **Chat Tab**이 ON인지 확인 (Slack 설정 5단계)
+7. `SLACK_ALLOWED_USERS`에 내 Member ID가 들어있는지 확인
