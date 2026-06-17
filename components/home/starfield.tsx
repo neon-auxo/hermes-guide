@@ -14,14 +14,14 @@ const DARK_COLORS = [
   [255, 255, 255], // pure white
 ];
 
-// Light mode: deep purple/indigo tones visible on light bg
+// Light mode: gold/amber dust — complements the purple theme
 const LIGHT_COLORS = [
-  [80,  60, 160],  // deep indigo
-  [100, 70, 180],  // purple
-  [60,  80, 180],  // deep blue-purple
-  [120, 80, 200],  // violet
-  [70,  60, 140],  // dark navy-purple
-  [100, 90, 170],  // medium indigo
+  [200, 150,  40],  // deep gold
+  [220, 170,  60],  // amber
+  [180, 130,  30],  // dark gold
+  [230, 190,  80],  // warm yellow-gold
+  [210, 155,  50],  // honey
+  [190, 140,  45],  // bronze-gold
 ];
 
 type Star = {
