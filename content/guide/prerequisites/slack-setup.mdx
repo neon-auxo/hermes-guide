@@ -139,6 +139,27 @@ Windows에서도 Slack 앱 절차는 동일합니다. 브라우저에서 api.sla
 카카오톡, GitHub, Slack 채널 등 공개된 곳에는 절대 붙여넣지 마세요.
 </Callout>
 
+## 선택 설정: 홈 채널 (예약 알림용)
+
+`SLACK_HOME_CHANNEL`은 Hermes가 예약 메시지·크론 작업 결과·자동 알림을 보낼 기본 채널을 지정합니다. 설정하지 않아도 기본 동작에는 영향 없습니다.
+
+**채널 ID 찾는 방법:**
+
+1. Slack에서 채널 이름을 우클릭
+2. **채널 세부 정보 보기(View channel details)** 클릭
+3. 화면 하단으로 스크롤 → **채널 ID** 확인 (예: `C01234567890`)
+
+`~/.hermes/.env`에 아래 항목을 추가하세요:
+
+```bash
+SLACK_HOME_CHANNEL=C01234567890        # 채널 ID
+SLACK_HOME_CHANNEL_NAME=general        # 채널 이름 (선택)
+```
+
+<Callout type="info">
+홈 채널로 지정한 채널에도 봇을 초대해야 합니다. (`/invite @Hermes`)
+</Callout>
+
 ## 동작 방식
 
 | 상황 | 응답 방식 |
