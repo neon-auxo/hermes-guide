@@ -50,10 +50,13 @@ export function Sidebar({ groups }: { groups: NavGroup[] }) {
   }
 
   return (
-    <nav className="w-56 shrink-0 space-y-6 py-6 pr-4">
-      {groups.map((group) => (
-        <div key={group.group}>
-          <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+    <nav className="w-56 shrink-0 py-6 pr-4">
+      {groups.map((group, index) => (
+        <div
+          key={group.group}
+          className={cn(index > 0 && "mt-1 border-t border-border pt-4")}
+        >
+          <p className="mb-1.5 px-3 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 select-none">
             {group.group}
           </p>
           <ul className="space-y-0.5">
