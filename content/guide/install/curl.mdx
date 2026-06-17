@@ -1,17 +1,22 @@
 ---
-title: "curl로 설치하기"
+title: "CLI 설치"
 description: "curl 명령어 한 줄로 Hermes CLI 설치 및 실행 확인"
 order: 7
 group: "설치하기"
 ---
 
-# curl로 설치하기
+# CLI 설치
 
 Hermes CLI 설치는 터미널 명령어 한 줄이면 됩니다. 사용하는 운영체제를 선택하세요:
 
 <Tabs>
 
 <Tab label="macOS / Linux">
+
+## 터미널 열기
+
+- `Cmd + Space` → "터미널" 검색
+- 또는 Finder → 응용 프로그램 → 유틸리티 → Terminal 실행
 
 ## 사전 확인
 
@@ -25,11 +30,6 @@ git --version
 
 `git version 2.x.x`가 나오면 됩니다. 없다면 [git-scm.com](https://git-scm.com)에서 설치하세요.
 
-## 터미널 열기
-
-- `Cmd + Space` → "터미널" 검색 → 엔터
-- 또는 Finder → 응용 프로그램 → 유틸리티 → Terminal.app
-
 ## 설치 명령어 실행
 
 <TerminalBlock title="Hermes CLI 설치">
@@ -40,11 +40,41 @@ curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 
 이 명령이 자동으로 처리하는 것:
 1. Python, Node.js v22, ripgrep, ffmpeg 등 필요한 도구 자동 설치
-2. Hermes CLI 최신 버전 다운로드 및 설치 (`~/.local/bin/hermes`)
+2. Hermes CLI 최신 버전 다운로드 및 설치
 
 <Callout type="info" title="설치 시간">
 인터넷 속도에 따라 2분 이내로 소요됩니다.
 </Callout>
+
+## 설치 순서
+
+1. **`Quick Setup (Nous Portal)` 선택**
+
+Nous Portal에 아직 가입하지 않았다면 아래 방법 중 하나로 가입합니다.
+
+| 방법 | 설명 |
+|------|------|
+| **Google** | 구글 계정으로 1클릭 가입 (가장 빠름) |
+| **이메일** | 이메일 주소 입력 → 확인 메일 클릭 |
+| **GitHub** | GitHub 계정 연동 |
+| **Discord** | Discord 계정 연동 |
+
+<Callout type="tip" title="처음이라면 Google 추천">
+Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다. 별도 비밀번호 없이 기존 계정으로 바로 가입됩니다.
+</Callout>
+
+이미 가입·로그인한 상태라면 **Connect** 버튼을 누르세요.
+
+2. **`stepfun/step-3.7-flash:free` 선택**
+3. **`Local - run directly on this machine (default)` 선택**
+4. **`Set up messaging now (recommended)` 선택**
+5. **`💼 Slack  (not configured)` 선택**
+6. Slack Bot Token (`xoxb-...`)에 토큰 입력
+7. Slack App Token (`xapp-...`)에 토큰 입력
+8. Allowed user IDs: 멤버 ID(`U...`) 입력
+9. Home channel ID: 채널 ID(`C...`) 입력
+10. **`Restart the gateway to pick up changes? [Y/n]`** → `y` 입력
+11. **`Would you like to install the gateway as a background service? [Y/n]`** → `y` 입력
 
 ## 설치 확인
 
@@ -59,6 +89,18 @@ hermes
 
 Hermes가 실행되면 성공입니다.
 
+## Slack 확인
+
+Slack에서 초대한 채널에 멘션을 보내보세요.
+
+<TerminalBlock>
+```
+@Hermes 안녕
+```
+</TerminalBlock>
+
+Hermes가 응답하면 연결 성공입니다.
+
 ## 문제 해결
 
 무슨 문제인지 모르겠다면 먼저 실행하세요:
@@ -69,7 +111,7 @@ hermes doctor
 ```
 </TerminalBlock>
 
-### `command not found: hermes`
+### "command not found: hermes"
 
 셸 새로 고침으로 해결됩니다:
 
@@ -113,6 +155,18 @@ curl -I https://hermes-agent.nousresearch.com
 
 `HTTP/2 200` 또는 `HTTP/2 301`이 나오면 정상입니다. `Could not resolve host`라면 VPN을 끄거나 네트워크 관리자에게 문의하세요.
 
+### Slack 응답이 없을 때 점검 순서
+
+`@Hermes 안녕`을 보냈는데 반응이 없다면:
+
+1. Socket Mode가 ON인지 확인 (Slack 앱 설정 3단계)
+2. `message.channels` / `message.groups` / `message.im` / `app_mention` 이벤트가 모두 추가됐는지 확인
+3. `channels:history` / `groups:history` scope가 추가됐는지 확인
+4. Reinstall to Agents를 실행했는지 확인 (scope·이벤트 변경 후 필수)
+5. `/invite @Hermes`로 봇을 채널에 초대했는지 확인
+6. DM에서 응답이 없다면 Chat Tab이 ON인지 확인 (Slack 설정 5단계)
+7. `SLACK_ALLOWED_USERS`에 내 Member ID가 들어있는지 확인
+
 
 </Tab>
 
@@ -137,8 +191,38 @@ iex (irm https://hermes-agent.nousresearch.com/install.ps1)
 2. Hermes CLI 최신 버전 다운로드 및 설치
 
 <Callout type="info" title="설치 시간">
-인터넷 속도에 따라 1~3분 정도 소요됩니다.
+인터넷 속도에 따라 2분 이내로 소요됩니다.
 </Callout>
+
+## 설치 순서
+
+1. **`Quick Setup (Nous Portal)` 선택**
+
+Nous Portal에 아직 가입하지 않았다면 아래 방법 중 하나로 가입합니다.
+
+| 방법 | 설명 |
+|------|------|
+| **Google** | 구글 계정으로 1클릭 가입 (가장 빠름) |
+| **이메일** | 이메일 주소 입력 → 확인 메일 클릭 |
+| **GitHub** | GitHub 계정 연동 |
+| **Discord** | Discord 계정 연동 |
+
+<Callout type="tip" title="처음이라면 Google 추천">
+Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다. 별도 비밀번호 없이 기존 계정으로 바로 가입됩니다.
+</Callout>
+
+이미 가입·로그인한 상태라면 **Connect** 버튼을 누르세요.
+
+2. **`stepfun/step-3.7-flash:free` 선택**
+3. **`Local - run directly on this machine (default)` 선택**
+4. **`Set up messaging now (recommended)` 선택**
+5. **`💼 Slack  (not configured)` 선택**
+6. Slack Bot Token (`xoxb-...`)에 토큰 입력
+7. Slack App Token (`xapp-...`)에 토큰 입력
+8. Allowed user IDs: 멤버 ID(`U...`) 입력
+9. Home channel ID: 채널 ID(`C...`) 입력
+10. **`Restart the gateway to pick up changes? [Y/n]`** → `y` 입력
+11. **`Would you like to install the gateway as a background service? [Y/n]`** → `y` 입력
 
 ## 설치 확인
 
@@ -152,6 +236,18 @@ hermes
 
 Hermes가 실행되면 성공입니다.
 
+## Slack 확인
+
+Slack에서 초대한 채널에 멘션을 보내보세요.
+
+<TerminalBlock>
+```
+@Hermes 안녕
+```
+</TerminalBlock>
+
+Hermes가 응답하면 연결 성공입니다.
+
 ## 문제 해결
 
 무슨 문제인지 모르겠다면 먼저 실행하세요:
@@ -162,13 +258,53 @@ hermes doctor
 ```
 </TerminalBlock>
 
-### `hermes` 명령을 찾을 수 없음
+### "command not found: hermes"
 
-PowerShell을 완전히 닫고 다시 열어서 실행해보세요. 그래도 안 된다면 환경 변수 PATH에 설치 경로가 추가됐는지 확인하세요.
+PowerShell을 완전히 닫고 다시 열어서 실행해보세요. 그래도 안 된다면 PATH를 직접 추가하세요:
+
+<TerminalBlock title="PATH 추가">
+```powershell
+$env:PATH += ";$env:LOCALAPPDATA\hermes\hermes-agent\venv\Scripts"
+[System.Environment]::SetEnvironmentVariable("PATH", $env:PATH, "User")
+hermes --version
+```
+</TerminalBlock>
+
+### "확인되지 않은 개발자" 보안 경고
+
+PowerShell 실행 정책 문제일 수 있습니다:
+
+<TerminalBlock title="실행 정책 변경">
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+</TerminalBlock>
+
+이후 다시 설치 명령을 실행하세요.
 
 ### 설치 명령이 실패하는 경우 (네트워크 오류)
 
-회사 네트워크나 VPN이라면 설치 서버 접근이 차단됐을 수 있습니다. VPN을 끄거나 네트워크 관리자에게 문의하세요.
+회사 네트워크나 VPN이라면 아래로 연결을 확인하세요:
+
+<TerminalBlock title="연결 확인">
+```powershell
+Invoke-WebRequest -Uri https://hermes-agent.nousresearch.com -Method Head
+```
+</TerminalBlock>
+
+`StatusCode: 200` 또는 `301`이 나오면 정상입니다. 오류가 나온다면 VPN을 끄거나 네트워크 관리자에게 문의하세요.
+
+### Slack 응답이 없을 때 점검 순서
+
+`@Hermes 안녕`을 보냈는데 반응이 없다면:
+
+1. Socket Mode가 ON인지 확인 (Slack 앱 설정 3단계)
+2. `message.channels` / `message.groups` / `message.im` / `app_mention` 이벤트가 모두 추가됐는지 확인
+3. `channels:history` / `groups:history` scope가 추가됐는지 확인
+4. Reinstall to Agents를 실행했는지 확인 (scope·이벤트 변경 후 필수)
+5. `/invite @Hermes`로 봇을 채널에 초대했는지 확인
+6. DM에서 응답이 없다면 Chat Tab이 ON인지 확인 (Slack 설정 5단계)
+7. `SLACK_ALLOWED_USERS`에 내 Member ID가 들어있는지 확인
 
 </Tab>
 

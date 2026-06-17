@@ -39,11 +39,7 @@ export function TerminalBlock({
           className="ml-auto rounded p-1 hover:bg-accent transition-colors"
           aria-label="복사"
         >
-          {copied ? (
-            <Check className="size-3.5 text-green-500" />
-          ) : (
-            <Copy className="size-3.5 text-muted-foreground" />
-          )}
+          <Copy className={`size-3.5 transition-colors ${copied ? "text-green-500" : "text-muted-foreground"}`} />
         </button>
       </div>
       <div

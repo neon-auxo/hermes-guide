@@ -1,91 +1,37 @@
 ---
-title: "첫 실행 & Slack 테스트"
-description: "Hermes Desktop 첫 실행, Nous Portal 가입, 첫 대화 확인, Slack 연결 테스트까지"
+title: "Slack 연결"
+description: "Hermes Desktop에서 Slack Gateway 연결하기"
 order: 9
 group: "설치하기"
 parentSlug: "gui"
 ---
 
-# 첫 실행 & Slack 테스트
-
-인스톨러 설치가 완료됐으면 **Hermes** 앱을 실행하세요. macOS는 Launchpad, Windows는 시작 메뉴에서 찾을 수 있습니다.
-
----
-
-## 1단계: Nous Portal 가입 / 로그인
-
-앱을 처음 실행하면 AI 제공자가 설정되지 않은 상태이므로 **브라우저에 Nous Portal 가입/로그인 화면**이 자동으로 열립니다.
-
-브라우저에 **"Welcome to Nous Portal"** 창이 뜨면 아래 중 하나로 가입하세요.
-
-| 방법 | 설명 |
-|------|------|
-| **Google** | 구글 계정으로 1클릭 가입 (가장 빠름) |
-| **이메일** | 이메일 주소 입력 → 확인 메일 클릭 |
-| **GitHub** | GitHub 계정 연동 |
-| **Discord** | Discord 계정 연동 |
-
-<Callout type="tip" title="처음이라면 Google 추천">
-Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다. 별도 비밀번호 없이 기존 계정으로 바로 가입됩니다.
-</Callout>
-
-로그인이 완료되면 브라우저 창이 닫히고 **Hermes Desktop 앱으로 자동 복귀**됩니다.
-
----
-
-## 2단계: 모델 확인 / 변경
-
-모델은 두 가지 방법으로 확인하거나 변경할 수 있습니다.
-
-- **상단 메뉴**: **설정 > 모델**에서 선택
-- **상태창**: 우측 하단의 현재 모델명(또는 **No model**)을 클릭해서 변경
-
-Nous Portal Free 플랜에서 무료로 사용할 수 있는 모델은 아래와 같습니다.
-
-| 모델 | 특징 |
-|------|------|
-| `stepfun/step-3.7-flash:free` | 빠른 응답, 일반 대화·코딩에 적합 |
-| `nvidia/nemotron-3-ultra:free` | 고품질 추론, 복잡한 작업에 적합 |
-
-`:free`가 붙은 모델이 무료 모델입니다.
-
----
-
-## 3단계: 첫 대화
-
-모델이 설정됐으면 앱 채팅창에 바로 입력하세요.
-
-```
-현재 디렉토리에 어떤 파일이 있는지 알려줘
-```
-
-Hermes가 답변하면 설정 완료입니다.
-
-<Callout type="warning" title="대화가 안 된다면">
-터미널에서 `hermes doctor`를 실행하면 문제를 진단하고 해결 방법을 안내합니다.
-</Callout>
-
----
-
-## Slack 연결
-
-Slack을 쓰지 않는다면 이 단계는 건너뛰어도 됩니다. Slack에서 Hermes를 사용하려면 아래를 따라주세요.
+# Slack 연결
 
 [사전 준비 — Slack 설정](/guide/prerequisites/slack-setup)에서 준비한 **Bot Token**과 **App Token**이 필요합니다.
 
-앱 좌측 사이드바에서 **Messaging > Slack**을 선택하고 아래 값을 입력하세요.
+1. 앱 좌측 사이드바에서 **Messaging > Slack** 선택
+2. **Paste Slack bot token** 입력 창에 `xoxb-`로 시작하는 토큰 붙여넣기
+3. **Paste Slack app token** 입력 창에 `xapp-`로 시작하는 토큰 붙여넣기
+4. **Save changes** 버튼 클릭
+5. Slack에서 초대한 채널에 멘션을 보내보세요.
 
 <TerminalBlock>
-```bash
-SLACK_BOT_TOKEN=xoxb-여기에붙여넣기
-SLACK_APP_TOKEN=xapp-여기에붙여넣기
-```
-</TerminalBlock>
-
-저장 후 Slack에서 DM 또는 초대한 채널에 멘션을 보내보세요.
-
 ```
 @Hermes 안녕
 ```
+</TerminalBlock>
 
 Hermes가 응답하면 연결 성공입니다.
+
+## 응답이 없을 때 점검 순서
+
+`@Hermes 안녕`을 보냈는데 반응이 없다면:
+
+1. Socket Mode가 ON인지 확인 (Slack 앱 설정 3단계)
+2. `message.channels` / `message.groups` / `message.im` / `app_mention` 이벤트가 모두 추가됐는지 확인
+3. `channels:history` / `groups:history` scope가 추가됐는지 확인
+4. Reinstall to Agents를 실행했는지 확인 (scope·이벤트 변경 후 필수)
+5. `/invite @Hermes`로 봇을 채널에 초대했는지 확인
+6. DM에서 응답이 없다면 Chat Tab이 ON인지 확인 (Slack 설정 5단계)
+7. `SLACK_ALLOWED_USERS`에 내 Member ID가 들어있는지 확인

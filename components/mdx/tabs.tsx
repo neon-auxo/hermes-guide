@@ -16,7 +16,7 @@ export function Tabs({ children }: { children: React.ReactNode }) {
             key={label}
             onClick={() => setActive(i)}
             className={cn(
-              "px-4 py-2 text-sm font-medium transition-colors",
+              "px-4 py-2 text-sm font-bold transition-colors",
               active === i
                 ? "border-b-2 border-primary text-primary"
                 : "text-muted-foreground hover:text-foreground"

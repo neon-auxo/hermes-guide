@@ -1,47 +1,78 @@
 ---
 title: "GUI 설치 (Hermes Desktop)"
-description: "Hermes Desktop 앱 설치 방법 — macOS/Windows 인스톨러 또는 CLI에서 실행"
+description: "Hermes Desktop 앱 설치 방법 — macOS/Windows"
 order: 6
 group: "설치하기"
 ---
 
 # GUI 설치 (Hermes Desktop)
 
-가장 쉽게 시작하는 방법은 **Hermes Desktop 인스톨러**입니다. 클릭 몇 번으로 CLI(터미널)와 Desktop 앱이 한 번에 설치됩니다.
+가장 쉽게 시작하는 방법은 **Hermes Desktop 앱**을 사용하는 것입니다.
 
 Hermes Desktop은 브라우저 웹앱이 아니라 **macOS/Windows용 네이티브 데스크탑 앱**입니다.
 
-## 방법 1 — 인스톨러로 설치 (권장)
-
-1. [hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/) 에서 **Download** 클릭
-2. macOS 또는 Windows용 인스톨러 다운로드
-3. 인스톨러 실행 — Python, Node.js 등 필요한 의존성 자동 설치
-
-<WindowsNote>
-Windows에서 인스톨러 실행 시 보안 경고가 뜨면 "추가 정보 → 실행"을 클릭하세요.
-방화벽 허용 여부를 묻는 경우 "액세스 허용"을 선택하세요.
-</WindowsNote>
-
 <Callout type="tip">
-인스톨러로 설치하면 CLI까지 함께 설치됩니다. 다음 페이지의 **curl로 설치하기**는 건너뛰어도 됩니다.
+Desktop 앱으로 설치하면 CLI까지 함께 설치되므로 **CLI 설치**는 건너뛰어도 됩니다.
 </Callout>
 
-## 방법 2 — curl로 CLI를 설치한 뒤 Desktop 앱 추가
+## 설치 순서
 
-**curl로 설치하기** 페이지에서 CLI만 먼저 설치했다면, 아래 명령으로 Desktop 앱을 추가로 실행할 수 있습니다.
+**1단계 — 다운로드**
 
-<TerminalBlock title="Desktop 앱 실행">
-```bash
-hermes desktop
+[hermes-agent.nousresearch.com](https://hermes-agent.nousresearch.com/) 에서 **Download** 클릭 후 파일을 받습니다.
+
+**2단계 — 다운로드 파일 실행**
+
+다운로드된 파일을 클릭하면 Hermes 아이콘이 나타납니다. 아이콘을 더블클릭해 실행하세요.
+
+**3단계 — Install Hermes 클릭**
+
+설치 창이 열리면 **Install Hermes** 버튼을 클릭합니다.
+
+**4단계 — 설치 진행**
+
+Prerequisites, Install dependencies, Build desktop app 등 단계별 설치 과정이 표시됩니다. 완료되면 **Launch Hermes** 버튼이 나타납니다. 클릭해 앱을 실행하세요.
+
+**5단계 — AI 제공자 설정**
+
+앱이 처음 실행되면 AI 제공자 설정 화면이 나옵니다. **Nous Portal (RECOMMENDED)** 를 선택하세요.
+
+Nous Portal에 아직 가입하지 않았다면 아래 방법 중 하나로 가입합니다.
+
+| 방법 | 설명 |
+|------|------|
+| **Google** | 구글 계정으로 1클릭 가입 (가장 빠름) |
+| **이메일** | 이메일 주소 입력 → 확인 메일 클릭 |
+| **GitHub** | GitHub 계정 연동 |
+| **Discord** | Discord 계정 연동 |
+
+<Callout type="tip" title="처음이라면 Google 추천">
+Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다. 별도 비밀번호 없이 기존 계정으로 바로 가입됩니다.
+</Callout>
+
+이미 가입·로그인한 상태라면 **Connect** 버튼을 누르세요.
+
+**6단계 — Default Model 설정**
+
+무료 모델이 자동으로 선택된 화면이 나오면 **BEGIN** 을 클릭합니다.
+
+**7단계 — 첫 대화 확인**
+
+앱 채팅창에 아래 메시지를 입력해보세요.
+
+<TerminalBlock>
+```
+이름이 뭐야?
 ```
 </TerminalBlock>
 
-처음 실행 시 Desktop 앱 구성 요소를 자동으로 설치합니다.
+Hermes가 답변하면 설치 완료입니다. (무료 모델은 답이 느릴 수 있습니다.)
 
-## 설치 완료
-
-Hermes Desktop까지 설치했다면 모든 준비가 끝났습니다. 터미널 CLI와 Desktop 앱 중 편한 방식으로 사용하세요.
-
-<Callout type="tip">
-Slack, Telegram 등 메신저에서 사용하고 싶다면 **초기 설정 & Slack 연결** 페이지를 참고하세요.
+<Callout type="warning" title="대화가 안 된다면">
+터미널에서 `hermes doctor`를 실행하면 문제를 진단하고 해결 방법을 안내합니다.
 </Callout>
+
+<WindowsNote>
+Windows에서 Desktop 앱 설치 시 보안 경고가 뜨면 "추가 정보 → 실행"을 클릭하세요.
+방화벽 허용 여부를 묻는 경우 "액세스 허용"을 선택하세요.
+</WindowsNote>

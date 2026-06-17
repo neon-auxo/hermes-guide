@@ -5,7 +5,7 @@ const STEPS = [
   {
     icon: <MessageSquare className="w-5 h-5" />,
     title: "요청 입구",
-    lines: ["CLI", "Slack · Telegram", "Cron"],
+    lines: ["CLI · GUI", "Slack · Telegram", "Cron"],
   },
   {
     icon: <Brain className="w-5 h-5" />,
