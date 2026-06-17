@@ -54,9 +54,9 @@ export function Sidebar({ groups }: { groups: NavGroup[] }) {
       {groups.map((group, index) => (
         <div
           key={group.group}
-          className={cn(index > 0 && "mt-1 border-t border-border pt-4")}
+          className={cn(index > 0 && "mt-4")}
         >
-          <p className="mb-1.5 px-3 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60 select-none">
+          <p className="mb-1.5 rounded-md bg-gradient-to-r from-primary/25 to-transparent px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary/75 select-none">
             {group.group}
           </p>
           <ul className="space-y-0.5">
