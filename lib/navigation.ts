@@ -6,6 +6,7 @@ export interface NavItem {
   title: string;
   slug: string[];
   href: string;
+  children?: NavItem[];
 }
 
 export interface NavGroup {
@@ -18,7 +19,9 @@ export const buildNavigation = cache(async (): Promise<NavGroup[]> => {
   const groups: Record<string, NavItem[]> = {};
   const groupOrder: Record<string, number> = {};
 
+  // 1st pass: top-level items only
   for (const { frontmatter, slug } of pages) {
+    if (frontmatter.parentSlug) continue;
     const g = frontmatter.group;
     if (!groups[g]) {
       groups[g] = [];
@@ -29,6 +32,23 @@ export const buildNavigation = cache(async (): Promise<NavGroup[]> => {
       slug,
       href: `/guide/${slug.join("/")}`,
     });
+  }
+
+  // 2nd pass: attach children under their parent item
+  for (const { frontmatter, slug } of pages) {
+    if (!frontmatter.parentSlug) continue;
+    const g = frontmatter.group;
+    const parent = groups[g]?.find(
+      (item) => item.slug[item.slug.length - 1] === frontmatter.parentSlug
+    );
+    if (parent) {
+      if (!parent.children) parent.children = [];
+      parent.children.push({
+        title: frontmatter.title,
+        slug,
+        href: `/guide/${slug.join("/")}`,
+      });
+    }
   }
 
   return Object.entries(groups)

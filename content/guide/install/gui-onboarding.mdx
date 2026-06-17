@@ -1,0 +1,92 @@
+---
+title: "초기 설정 & Slack 연결 (Desktop)"
+description: "Hermes Desktop 앱 첫 실행부터 Nous Portal 가입, 모델 선택, 첫 대화까지"
+order: 9
+group: "설치하기"
+parentSlug: "gui"
+---
+
+# 초기 설정 & Slack 연결 (Desktop)
+
+인스톨러 설치가 완료됐으면 Hermes Desktop 앱을 실행해 보세요.
+
+---
+
+## 1단계: Hermes Desktop 앱 실행
+
+설치된 **Hermes** 앱을 더블클릭해 실행합니다.
+
+- **macOS**: Launchpad 또는 Applications 폴더에서 **Hermes** 실행
+- **Windows**: 시작 메뉴 또는 바탕화면 바로가기에서 **Hermes** 실행
+
+<Callout type="info">
+이미 터미널에서 `hermes desktop` 명령을 실행해도 됩니다.
+</Callout>
+
+---
+
+## 2단계: Nous Portal 가입 / 로그인
+
+AI 제공자가 설정되지 않은 상태이면 앱이 자동으로 **브라우저에 Nous Portal 가입/로그인 화면**을 엽니다.
+
+브라우저에 **"Welcome to Nous Portal"** 창이 뜨면 아래 중 하나로 가입하세요.
+
+| 방법 | 설명 |
+|------|------|
+| **Google** | 구글 계정으로 1클릭 가입 (가장 빠름) |
+| **이메일** | 이메일 주소 입력 → 확인 메일 클릭 |
+| **GitHub** | GitHub 계정 연동 |
+| **Discord** | Discord 계정 연동 |
+
+<Callout type="tip" title="처음이라면 Google 추천">
+Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다.
+</Callout>
+
+로그인이 완료되면 브라우저 창이 닫히고 **Hermes Desktop 앱으로 자동 복귀**됩니다.
+
+---
+
+## 3단계: 모델 확인 / 변경
+
+앱 안에서 `/model`을 입력하면 현재 모델을 확인하거나 변경할 수 있습니다.
+
+```
+/model
+```
+
+Nous Portal Free 플랜에서 무료로 사용할 수 있는 모델은 아래와 같습니다.
+
+| 모델 | 특징 |
+|------|------|
+| `stepfun/step-3.7-flash:free` | 빠른 응답, 일반 대화·코딩에 적합 |
+| `nvidia/nemotron-3-ultra:free` | 고품질 추론, 복잡한 작업에 적합 |
+
+<Callout type="info">
+`/`를 입력하면 사용 가능한 모든 슬래시 명령어 목록이 자동완성으로 표시됩니다.
+</Callout>
+
+---
+
+## 4단계: 첫 대화
+
+앱 채팅창에 바로 입력하세요.
+
+```
+현재 디렉토리에 어떤 파일이 있는지 알려줘
+```
+
+Hermes가 답변하면 설정 완료입니다.
+
+<Callout type="warning" title="대화가 안 된다면">
+터미널에서 `hermes doctor`를 실행하면 문제를 진단하고 해결 방법을 안내합니다.
+</Callout>
+
+---
+
+## Slack 연결 (선택 사항)
+
+Slack 연결은 터미널에서 설정합니다. 터미널을 열고 [초기 설정 & Slack 연결](/guide/install/onboarding)의 **Slack 연결** 섹션을 따라주세요.
+
+<Callout type="info">
+`hermes gateway setup` 및 `hermes gateway` 명령은 Desktop 앱과 무관하게 터미널에서 실행합니다. Gateway가 실행 중이면 Slack 메시지는 Desktop 앱 세션과 공유됩니다.
+</Callout>

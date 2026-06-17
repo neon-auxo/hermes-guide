@@ -14,6 +14,7 @@ export interface GuideFrontmatter {
   description: string;
   order: number;
   group: string;
+  parentSlug?: string;
 }
 
 async function readMdxFile(filePath: string) {
