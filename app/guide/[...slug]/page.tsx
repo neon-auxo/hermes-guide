@@ -36,12 +36,23 @@ export default async function GuidePage({ params }: Props) {
   }
 
   const groups = await buildNavigation();
-  const allItems = groups.flatMap((g) => g.items);
+  // Flatten: parent → its children → next parent → …
+  const allItems = groups.flatMap((g) =>
+    g.items.flatMap((item) => [item, ...(item.children ?? [])])
+  );
   const currentHref = `/guide/${slug.join("/")}`;
   const currentIdx = allItems.findIndex((i) => i.href === currentHref);
 
+  // Child pages have no "next" — they are terminal within their parent section
+  const isChild = groups.some((g) =>
+    g.items.some((item) => item.children?.some((c) => c.href === currentHref))
+  );
+
   const prev = currentIdx > 0 ? allItems[currentIdx - 1] : null;
-  const next = currentIdx < allItems.length - 1 ? allItems[currentIdx + 1] : null;
+  const next =
+    !isChild && currentIdx < allItems.length - 1
+      ? allItems[currentIdx + 1]
+      : null;
 
   return (
     <GuideLayout>
