@@ -14,16 +14,6 @@ const DARK_COLORS = [
   [255, 255, 255], // pure white
 ];
 
-// Light mode: gold/amber dust — complements the purple theme
-const LIGHT_COLORS = [
-  [200, 150,  40],  // deep gold
-  [220, 170,  60],  // amber
-  [180, 130,  30],  // dark gold
-  [230, 190,  80],  // warm yellow-gold
-  [210, 155,  50],  // honey
-  [190, 140,  45],  // bronze-gold
-];
-
 type Star = {
   x: number;
   y: number;
@@ -33,6 +23,45 @@ type Star = {
   base: number;
   color: number[];
 };
+
+// Aurora bands for light mode
+const AURORA_BANDS = [
+  { yRatio: 0.08, color: [100, 220, 210] as [number,number,number], alpha: 0.28, freq: 0.0025, amp: 55, speed: 0.18 },
+  { yRatio: 0.20, color: [180, 120, 255] as [number,number,number], alpha: 0.22, freq: 0.0035, amp: 45, speed: 0.25 },
+  { yRatio: 0.32, color: [80,  200, 180] as [number,number,number], alpha: 0.18, freq: 0.0020, amp: 65, speed: 0.14 },
+  { yRatio: 0.14, color: [230, 130, 220] as [number,number,number], alpha: 0.16, freq: 0.0040, amp: 40, speed: 0.30 },
+];
+
+function drawAurora(ctx: CanvasRenderingContext2D, w: number, h: number, t: number) {
+  for (const band of AURORA_BANDS) {
+    const baseY = h * band.yRatio;
+    const bandH = h * 0.28;
+    const [r, g, b] = band.color;
+
+    // vertical gradient: fade in then fade out
+    const grad = ctx.createLinearGradient(0, baseY - bandH, 0, baseY + bandH);
+    grad.addColorStop(0,   `rgba(${r},${g},${b},0)`);
+    grad.addColorStop(0.4, `rgba(${r},${g},${b},${band.alpha})`);
+    grad.addColorStop(0.6, `rgba(${r},${g},${b},${band.alpha})`);
+    grad.addColorStop(1,   `rgba(${r},${g},${b},0)`);
+
+    // draw undulating band shape
+    ctx.beginPath();
+    ctx.moveTo(0, baseY);
+    for (let x = 0; x <= w; x += 6) {
+      const y =
+        baseY +
+        Math.sin(x * band.freq + t * band.speed) * band.amp +
+        Math.sin(x * band.freq * 0.6 + t * band.speed * 0.8 + 1.2) * band.amp * 0.4;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+}
 
 export function Starfield() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -50,10 +79,10 @@ export function Starfield() {
       if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      init();
+      initStars();
     }
 
-    function init() {
+    function initStars() {
       if (!canvas) return;
       const count = Math.floor((canvas.width * canvas.height) / 4000);
       stars = Array.from({ length: Math.min(count, 280) }, () => ({
@@ -71,33 +100,32 @@ export function Starfield() {
 
     function draw() {
       if (!canvas || !ctx) return;
-
       const isDark = document.documentElement.classList.contains("dark");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      for (const s of stars) {
-        const alpha = Math.max(0.1, s.base + Math.sin(t * s.speed + s.phase) * 0.45);
-        const col = isDark
-          ? s.color
-          : LIGHT_COLORS[Math.floor(Math.abs(Math.sin(s.phase * 7)) * LIGHT_COLORS.length)];
-        const [r, g, b] = col;
-        const a = isDark ? alpha : alpha * 0.55;
-
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
-        ctx.fill();
-
-        // glow for brighter stars (dark mode only)
-        if (isDark && s.r > 1.2 && alpha > 0.7) {
+      if (isDark) {
+        // twinkling stars
+        for (const s of stars) {
+          const alpha = Math.max(0.1, s.base + Math.sin(t * s.speed + s.phase) * 0.45);
+          const [r, g, b] = s.color;
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.12})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
           ctx.fill();
+          if (s.r > 1.2 && alpha > 0.7) {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.12})`;
+            ctx.fill();
+          }
         }
+        t += 0.02;
+      } else {
+        // aurora bands
+        drawAurora(ctx, canvas.width, canvas.height, t);
+        t += 0.01;
       }
 
-      t += 0.02;
       animId = requestAnimationFrame(draw);
     }
 
