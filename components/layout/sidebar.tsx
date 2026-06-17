@@ -56,7 +56,7 @@ export function Sidebar({ groups }: { groups: NavGroup[] }) {
           key={group.group}
           className={cn(index > 0 && "mt-4")}
         >
-          <p className="mb-1.5 rounded-md bg-gradient-to-r from-primary/25 to-transparent px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary/75 select-none">
+          <p className="mb-1.5 rounded-md bg-gradient-to-r from-amber-500/20 to-transparent px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400 select-none">
             {group.group}
           </p>
           <ul className="space-y-0.5">
