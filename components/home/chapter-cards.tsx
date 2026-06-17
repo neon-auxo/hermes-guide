@@ -1,100 +1,134 @@
 // components/home/chapter-cards.tsx
 import Link from "next/link";
-import { ArrowRight, Bot, Scale, ListChecks, Download, Monitor } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight, Monitor, Terminal } from "lucide-react";
 
-const CHAPTERS: { step: number; icon: LucideIcon; title: string; desc: string; href: string }[] = [
+const INSTALL_PATHS = [
   {
-    step: 1,
-    icon: Bot,
-    title: "Hermes란?",
-    desc: "Nous Research가 설계한 에이전트의 구조 — memory·skill·tool이 어떻게 맞물리는지 살펴봅니다.",
-    href: "/guide/what-is-hermes",
-  },
-  {
-    step: 2,
-    icon: Scale,
-    title: "다른 도구와 비교",
-    desc: "OpenClaw, Claude Code, ChatGPT와 뭐가 다른지 목적별로 비교해봅니다.",
-    href: "/guide/comparison",
-  },
-  {
-    step: 3,
-    icon: ListChecks,
-    title: "사전 준비",
-    desc: "Slack 워크스페이스, LLM 키 또는 Portal 계정, 키를 안전하게 보관할 규칙부터 정리합니다.",
-    href: "/guide/prerequisites/slack-setup",
-  },
-  {
-    step: 4,
-    icon: Download,
-    title: "설치하기",
-    desc: "curl 한 줄로 CLI를 설치하고, 온보딩을 거쳐 Slack 연결, 모델 설정까지 순서대로 안내합니다.",
-    href: "/guide/install/curl",
-  },
-  {
-    step: 5,
     icon: Monitor,
-    title: "GUI 설치",
-    desc: "터미널 없이 쓸 수 있는 Hermes Desktop 앱. macOS/Windows 인스톨러 또는 CLI 두 가지 경로를 소개합니다.",
+    label: "GUI 인스톨러",
+    sub: "Hermes Desktop · macOS / Windows",
+    desc: "터미널 없이 설치. 앱 실행 후 바로 쓸 수 있습니다.",
     href: "/guide/install/gui",
+    badge: "추천",
   },
-];
+  {
+    icon: Terminal,
+    label: "curl로 설치",
+    sub: "CLI · 터미널 한 줄",
+    desc: "curl 한 줄로 설치하고 온보딩을 거쳐 Slack을 연결합니다.",
+    href: "/guide/install/curl",
+    badge: null,
+  },
+] as const;
+
+const TOC = [
+  { num: "01", title: "Hermes란?", href: "/guide/what-is-hermes" },
+  { num: "02", title: "다른 도구와 비교", href: "/guide/comparison" },
+  { num: "03", title: "구성 개념 소개", href: "/guide/concepts" },
+  { divider: "사전 준비" },
+  { num: "04", title: "Slack 설정", href: "/guide/prerequisites/slack-setup" },
+  { num: "05", title: "AI 제공자 설정", href: "/guide/prerequisites/api-keys" },
+  { divider: "설치하기" },
+  { num: "06", title: "GUI 설치 (Hermes Desktop)", href: "/guide/install/gui" },
+  { num: "07", title: "curl로 설치하기", href: "/guide/install/curl" },
+] as const;
 
 export function ChapterCards() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-24">
-      {/* section header */}
-      <div className="mb-8 flex items-end justify-between border-b border-border pb-4">
-        <div>
-          <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-primary/70">목차</p>
-          <h2 className="text-2xl font-bold tracking-tight">전체 챕터</h2>
-        </div>
-        <span className="text-sm text-muted-foreground">{CHAPTERS.length}개 챕터</span>
-      </div>
-
-      {/* cards — first row 3-col, last row 2-col centered */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {CHAPTERS.map((chapter) => {
-          const Icon = chapter.icon;
-          const isLast = chapter.step === CHAPTERS.length;
-          const isSecondLast = chapter.step === CHAPTERS.length - 1;
-          const totalCards = CHAPTERS.length;
-          const remainder = totalCards % 3;
-          // last row orphan centering: if remainder=2, last 2 cards span a centered row
-          const orphanClass =
-            remainder === 2 && (isLast || isSecondLast)
-              ? "lg:col-span-1 lg:[&:nth-child(4)]:col-start-1 lg:[&:nth-child(5)]:col-start-2"
-              : "";
-          return (
-            <Link
-              key={chapter.href}
-              href={chapter.href}
-              className={`group relative flex flex-col gap-3 rounded-xl border border-border bg-card p-6 shadow-sm hover:border-primary/40 hover:shadow-md transition-all ${orphanClass}`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-primary/8 text-primary">
+    <div className="mx-auto max-w-6xl px-6 pb-24 space-y-20">
+      {/* installation paths */}
+      <section>
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          설치 방법 선택
+        </p>
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">
+          어떻게 시작할까요?
+        </h2>
+        <div
+          className="grid gap-4 sm:grid-cols-2 animate-[fade-up_0.6s_ease-out_both]"
+          style={{ animationDelay: "300ms" }}
+        >
+          {INSTALL_PATHS.map((path) => {
+            const Icon = path.icon;
+            return (
+              <Link
+                key={path.href}
+                href={path.href}
+                className="group relative flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary/40 hover:shadow-md"
+              >
+                {path.badge && (
+                  <span className="absolute right-4 top-4 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    {path.badge}
+                  </span>
+                )}
+                <div className="flex size-10 items-center justify-center rounded-xl bg-primary/8 text-primary">
                   <Icon className="size-5" />
                 </div>
-                <span className="text-[11px] font-mono font-semibold text-muted-foreground/50 tabular-nums">
-                  {String(chapter.step).padStart(2, "0")}
+                <div>
+                  <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {path.label}
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted-foreground/70 font-mono">
+                    {path.sub}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    {path.desc}
+                  </p>
+                </div>
+                <div className="mt-auto flex items-center gap-1 text-xs font-medium text-primary">
+                  가이드 보기
+                  <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* table of contents */}
+      <section
+        className="animate-[fade-up_0.6s_ease-out_both]"
+        style={{ animationDelay: "450ms" }}
+      >
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+          가이드 구성
+        </p>
+        <h2 className="mb-6 text-xl font-bold tracking-tight text-foreground">
+          읽는 순서
+        </h2>
+
+        <div className="divide-y divide-border rounded-2xl border border-border overflow-hidden">
+          {TOC.map((item, i) => {
+            if ("divider" in item) {
+              return (
+                <div
+                  key={`divider-${i}`}
+                  className="bg-muted/50 px-5 py-2"
+                >
+                  <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/60">
+                    {item.divider}
+                  </span>
+                </div>
+              );
+            }
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group flex items-center gap-4 bg-card px-5 py-3.5 transition-colors hover:bg-accent"
+              >
+                <span className="w-6 shrink-0 font-mono text-[11px] font-semibold tabular-nums text-muted-foreground/40">
+                  {item.num}
                 </span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {chapter.title}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                  {chapter.desc}
-                </p>
-              </div>
-              <div className="mt-auto flex items-center gap-1 text-xs text-primary font-medium">
-                읽기 <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    </section>
+                <span className="flex-1 text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                  {item.title}
+                </span>
+                <ArrowRight className="size-3.5 text-muted-foreground/30 transition-all group-hover:translate-x-0.5 group-hover:text-primary" />
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+    </div>
   );
 }
