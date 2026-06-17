@@ -111,6 +111,27 @@ SLACK_ALLOWED_USERS=U01ABC2DEF3
 ```
 </TerminalBlock>
 
+### 홈 채널 설정 (선택)
+
+예약 메시지·크론 작업 결과 등 Hermes가 자동으로 보내는 알림을 받을 기본 채널을 지정할 수 있습니다.
+
+**채널 ID 찾는 방법:**
+
+1. Slack에서 채널 이름을 우클릭
+2. **채널 세부 정보 보기(View channel details)** 클릭
+3. 화면 하단으로 스크롤 → **채널 ID** 확인 (예: `C01234567890`)
+
+`~/.hermes/.env`에 추가하세요:
+
+```bash
+SLACK_HOME_CHANNEL=C01234567890        # 채널 ID
+SLACK_HOME_CHANNEL_NAME=general        # 채널 이름 (선택)
+```
+
+<Callout type="info">
+홈 채널로 지정한 채널에도 봇을 초대해야 합니다. (`/invite @Hermes`)
+</Callout>
+
 ### Gateway 시작
 
 <TerminalBlock title="Gateway 실행">
