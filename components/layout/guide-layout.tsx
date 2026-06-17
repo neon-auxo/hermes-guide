@@ -10,7 +10,7 @@ export async function GuideLayout({
 
   return (
     <div className="mx-auto flex max-w-6xl gap-8 px-6 py-8">
-      <aside className="hidden md:block">
+      <aside className="hidden md:block border-r border-border pr-2">
         <div className="sticky top-20">
           <Sidebar groups={groups} />
         </div>
