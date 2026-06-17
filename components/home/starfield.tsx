@@ -3,8 +3,8 @@
 
 import { useEffect, useRef } from "react";
 
-// Astronomical star color palette
-const STAR_COLORS = [
+// Dark mode: bright astronomical star colors
+const DARK_COLORS = [
   [255, 252, 240], // warm white
   [200, 220, 255], // cool blue-white
   [255, 245, 180], // yellow-white
@@ -12,6 +12,16 @@ const STAR_COLORS = [
   [255, 210, 160], // warm orange-white
   [230, 190, 255], // lavender
   [255, 255, 255], // pure white
+];
+
+// Light mode: deep purple/indigo tones visible on light bg
+const LIGHT_COLORS = [
+  [80,  60, 160],  // deep indigo
+  [100, 70, 180],  // purple
+  [60,  80, 180],  // deep blue-purple
+  [120, 80, 200],  // violet
+  [70,  60, 140],  // dark navy-purple
+  [100, 90, 170],  // medium indigo
 ];
 
 type Star = {
@@ -51,9 +61,9 @@ export function Starfield() {
         y: Math.random() * canvas.height,
         r: Math.random() * 1.6 + 0.4,
         phase: Math.random() * Math.PI * 2,
-        speed: 0.8 + Math.random() * 2.0,
+        speed: 0.3 + Math.random() * 0.9,
         base: 0.45 + Math.random() * 0.4,
-        color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
+        color: DARK_COLORS[Math.floor(Math.random() * DARK_COLORS.length)],
       }));
     }
 
@@ -63,26 +73,23 @@ export function Starfield() {
       if (!canvas || !ctx) return;
 
       const isDark = document.documentElement.classList.contains("dark");
-      // Only draw stars in dark mode
-      if (!isDark) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        t += 0.04;
-        animId = requestAnimationFrame(draw);
-        return;
-      }
-
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const s of stars) {
         const alpha = Math.max(0.1, s.base + Math.sin(t * s.speed + s.phase) * 0.45);
-        const [r, g, b] = s.color;
+        const col = isDark
+          ? s.color
+          : LIGHT_COLORS[Math.floor(Math.abs(Math.sin(s.phase * 7)) * LIGHT_COLORS.length)];
+        const [r, g, b] = col;
+        const a = isDark ? alpha : alpha * 0.55;
+
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
         ctx.fill();
 
-        // glow for brighter stars
-        if (s.r > 1.2 && alpha > 0.7) {
+        // glow for brighter stars (dark mode only)
+        if (isDark && s.r > 1.2 && alpha > 0.7) {
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.12})`;
@@ -90,7 +97,7 @@ export function Starfield() {
         }
       }
 
-      t += 0.04;
+      t += 0.02;
       animId = requestAnimationFrame(draw);
     }
 
