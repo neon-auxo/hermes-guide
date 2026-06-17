@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Moon, Sun, Monitor, Menu, X } from "lucide-react";
+import { Moon, Sun, Monitor, Menu, X, BrainCircuit } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -36,7 +36,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-primary">
-          <span>🪬</span>
+          <BrainCircuit className="size-5" />
           <span>Hermes 가이드</span>
         </Link>
 

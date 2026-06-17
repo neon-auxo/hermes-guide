@@ -1,13 +1,15 @@
 // components/home/hero-section.tsx
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function HeroSection() {
   return (
     <section className="mx-auto flex max-w-6xl flex-col items-center justify-center px-6 py-24 text-center">
-      <div className="mb-4 text-5xl">🪬</div>
+      <div className="mb-5 flex size-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <BrainCircuit className="size-8" />
+      </div>
       <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
         Hermes 쉽게 따라하기
       </h1>
