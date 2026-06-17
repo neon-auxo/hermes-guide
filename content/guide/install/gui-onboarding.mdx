@@ -12,22 +12,9 @@ parentSlug: "gui"
 
 ---
 
-## 1단계: Hermes Desktop 앱 실행
+## 1단계: Nous Portal 가입 / 로그인
 
-설치된 **Hermes** 앱을 더블클릭해 실행합니다.
-
-- **macOS**: Launchpad 또는 Applications 폴더에서 **Hermes** 실행
-- **Windows**: 시작 메뉴 또는 바탕화면 바로가기에서 **Hermes** 실행
-
-<Callout type="info">
-이미 터미널에서 `hermes desktop` 명령을 실행해도 됩니다.
-</Callout>
-
----
-
-## 2단계: Nous Portal 가입 / 로그인
-
-AI 제공자가 설정되지 않은 상태이면 앱이 자동으로 **브라우저에 Nous Portal 가입/로그인 화면**을 엽니다.
+앱을 처음 실행하면 AI 제공자가 설정되지 않은 상태이므로 **브라우저에 Nous Portal 가입/로그인 화면**이 자동으로 열립니다.
 
 브라우저에 **"Welcome to Nous Portal"** 창이 뜨면 아래 중 하나로 가입하세요.
 
@@ -39,20 +26,19 @@ AI 제공자가 설정되지 않은 상태이면 앱이 자동으로 **브라우
 | **Discord** | Discord 계정 연동 |
 
 <Callout type="tip" title="처음이라면 Google 추천">
-Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다.
+Google 계정이 있다면 **Google** 버튼을 누르는 게 가장 빠릅니다. 별도 비밀번호 없이 기존 계정으로 바로 가입됩니다.
 </Callout>
 
 로그인이 완료되면 브라우저 창이 닫히고 **Hermes Desktop 앱으로 자동 복귀**됩니다.
 
 ---
 
-## 3단계: 모델 확인 / 변경
+## 2단계: 모델 확인 / 변경
 
-앱 안에서 `/model`을 입력하면 현재 모델을 확인하거나 변경할 수 있습니다.
+모델은 두 가지 방법으로 확인하거나 변경할 수 있습니다.
 
-```
-/model
-```
+- **상단 메뉴**: **설정 > 모델**에서 선택
+- **상태창**: 우측 하단의 현재 모델명(또는 **No model**)을 클릭해서 변경
 
 Nous Portal Free 플랜에서 무료로 사용할 수 있는 모델은 아래와 같습니다.
 
@@ -61,15 +47,13 @@ Nous Portal Free 플랜에서 무료로 사용할 수 있는 모델은 아래와
 | `stepfun/step-3.7-flash:free` | 빠른 응답, 일반 대화·코딩에 적합 |
 | `nvidia/nemotron-3-ultra:free` | 고품질 추론, 복잡한 작업에 적합 |
 
-<Callout type="info">
-`/`를 입력하면 사용 가능한 모든 슬래시 명령어 목록이 자동완성으로 표시됩니다.
-</Callout>
+`:free`가 붙은 모델이 무료 모델입니다.
 
 ---
 
-## 4단계: 첫 대화
+## 3단계: 첫 대화
 
-앱 채팅창에 바로 입력하세요.
+모델이 설정됐으면 앱 채팅창에 바로 입력하세요.
 
 ```
 현재 디렉토리에 어떤 파일이 있는지 알려줘
@@ -83,10 +67,23 @@ Hermes가 답변하면 설정 완료입니다.
 
 ---
 
-## Slack 연결 (선택 사항)
+## Slack 연결
 
-Slack 연결은 터미널에서 설정합니다. 터미널을 열고 [초기 설정 & Slack 연결](/guide/install/onboarding)의 **Slack 연결** 섹션을 따라주세요.
+CLI만 쓴다면 이 단계는 건너뛰어도 됩니다. Slack에서 Hermes를 사용하려면 아래를 따라주세요.
 
-<Callout type="info">
-`hermes gateway setup` 및 `hermes gateway` 명령은 Desktop 앱과 무관하게 터미널에서 실행합니다. Gateway가 실행 중이면 Slack 메시지는 Desktop 앱 세션과 공유됩니다.
-</Callout>
+[사전 준비 — Slack 설정](/guide/prerequisites/slack-setup)에서 준비한 **Bot Token**과 **App Token**이 필요합니다.
+
+앱 좌측 사이드바에서 **Messaging > Slack**을 선택하고 아래 값을 입력하세요.
+
+```
+SLACK_BOT_TOKEN=xoxb-여기에붙여넣기
+SLACK_APP_TOKEN=xapp-여기에붙여넣기
+```
+
+저장 후 Slack에서 DM 또는 초대한 채널에 멘션을 보내보세요.
+
+```
+@Hermes 안녕
+```
+
+Hermes가 응답하면 연결 성공입니다.
