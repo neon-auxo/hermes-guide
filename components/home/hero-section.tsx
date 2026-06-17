@@ -7,12 +7,6 @@ import { cn } from "@/lib/utils";
 export function HeroSection() {
   return (
     <section className="relative mx-auto flex max-w-6xl flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">
-      {/* radial glow — stronger, dual-layer */}
-      <div className="pointer-events-none absolute inset-0 flex items-start justify-center">
-        <div className="h-[420px] w-[840px] rounded-full bg-primary/8 blur-3xl" />
-        <div className="absolute h-[200px] w-[400px] rounded-full bg-primary/12 blur-2xl" />
-      </div>
-
       <div className="relative flex flex-col items-center">
         {/* title */}
         <h1
