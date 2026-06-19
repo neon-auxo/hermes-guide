@@ -36,12 +36,16 @@ export default async function GuidePage({ params }: Props) {
   }
 
   const groups = await buildNavigation();
-  // Flatten: parent → its children → next parent → …
-  const allItems = groups.flatMap((g) =>
-    g.items.flatMap((item) => [item, ...(item.children ?? [])])
+  // Flatten: parent → its children → next parent → … (그룹 라벨 동반)
+  const flat = groups.flatMap((g) =>
+    g.items.flatMap((item) =>
+      [item, ...(item.children ?? [])].map((entry) => ({ ...entry, group: g.group }))
+    )
   );
+  const allItems = flat;
   const currentHref = `/guide/${slug.join("/")}`;
   const currentIdx = allItems.findIndex((i) => i.href === currentHref);
+  const currentGroup = allItems[currentIdx]?.group;
 
   // Child pages have no "next" — they are terminal within their parent section
   const isChild = groups.some((g) =>
@@ -67,10 +71,17 @@ export default async function GuidePage({ params }: Props) {
     }
   }
 
-  const next =
-    !isChild && currentIdx < allItems.length - 1
-      ? allItems[currentIdx + 1]
-      : null;
+  let next: typeof allItems[0] | null = null;
+  if (currentIdx >= 0 && currentIdx < allItems.length - 1) {
+    if (isChild) {
+      // child 페이지는 같은 그룹의 남은 항목을 건너뛰고 다음 그룹의 첫 항목으로 이동
+      next =
+        allItems.slice(currentIdx + 1).find((i) => i.group !== currentGroup) ??
+        null;
+    } else {
+      next = allItems[currentIdx + 1];
+    }
+  }
 
   return (
     <GuideLayout>
