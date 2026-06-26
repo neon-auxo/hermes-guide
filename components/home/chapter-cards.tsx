@@ -1,6 +1,7 @@
 // components/home/chapter-cards.tsx
 import Link from "next/link";
 import { ArrowRight, Monitor, Terminal } from "lucide-react";
+import { buildNavigation } from "@/lib/navigation";
 
 const INSTALL_PATHS = [
   {
@@ -13,27 +14,35 @@ const INSTALL_PATHS = [
   },
   {
     icon: Terminal,
-    label: "curl로 설치",
+    label: "CLI 설치",
     sub: "CLI · 터미널 한 줄",
-    desc: "curl 한 줄로 설치하고 온보딩을 거쳐 Slack을 연결합니다.",
+    desc: "curl 한 줄로 설치하고 Quick Setup으로 Slack까지 연결합니다.",
     href: "/guide/install/curl",
     badge: null,
   },
 ] as const;
 
-const TOC = [
-  { num: "01", title: "Hermes란?", href: "/guide/what-is-hermes" },
-  { num: "02", title: "다른 도구와 비교", href: "/guide/comparison" },
-  { num: "03", title: "구성 개념 소개", href: "/guide/concepts" },
-  { divider: "사전 준비" },
-  { num: "04", title: "Slack 설정", href: "/guide/prerequisites/slack-setup" },
-  { num: "05", title: "AI 제공자 설정", href: "/guide/prerequisites/api-keys" },
-  { divider: "설치하기" },
-  { num: "06", title: "GUI 설치 (Hermes Desktop)", href: "/guide/install/gui" },
-  { num: "07", title: "curl로 설치하기", href: "/guide/install/curl" },
-] as const;
+type TocRow =
+  | { divider: string }
+  | { num: string; title: string; href: string };
 
-export function ChapterCards() {
+export async function ChapterCards() {
+  // 사이드바와 동일한 내비게이션 정보에서 목차를 자동 생성 (콘텐츠 추가 시 자동 반영)
+  const groups = await buildNavigation();
+  const TOC: TocRow[] = [];
+  let n = 0;
+  for (const g of groups) {
+    TOC.push({ divider: g.group });
+    for (const item of g.items) {
+      n += 1;
+      TOC.push({ num: String(n).padStart(2, "0"), title: item.title, href: item.href });
+      for (const child of item.children ?? []) {
+        n += 1;
+        TOC.push({ num: String(n).padStart(2, "0"), title: child.title, href: child.href });
+      }
+    }
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-6 pb-24 space-y-20">
       {/* installation paths */}

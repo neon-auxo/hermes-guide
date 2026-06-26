@@ -24,8 +24,8 @@ export function HeroSection() {
           className="mt-5 max-w-lg text-base text-muted-foreground sm:text-lg animate-[fade-up_0.6s_ease-out_both]"
           style={{ animationDelay: "100ms" }}
         >
-          GUI 인스톨러 또는 curl 한 줄로 설치하고, Slack 연결부터 모델 설정까지
-          순서대로 따라할 수 있게 정리했습니다.
+          GUI 인스톨러 또는 curl 한 줄로 설치하고, Slack 연결·모델 설정부터
+          에이전트·스킬·반복 작업 실습까지 순서대로 따라할 수 있게 정리했습니다.
         </p>
 
         {/* cta */}
